@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vizuara | A Complete Visual Guide to Mastering Modern AI and LLMs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a2e;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --card-bg: #ffffff;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+      --card-hover-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 40%, #f1f5f9 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-weight: 900; font-size: 22px; letter-spacing: 2px; text-decoration: none;
+      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary); font-weight: 500;
+      font-size: 14px; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links .nav-cta {
+      background: var(--text); color: #fff; padding: 8px 20px;
+      border-radius: 8px; font-weight: 600; transition: opacity 0.2s;
+    }
+    .nav-links .nav-cta:hover { opacity: 0.85; color: #fff; }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; border-radius: 2px; transition: 0.3s; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 160px 32px 80px; text-align: center;
+      max-width: 860px; margin: 0 auto;
+    }
+    .hero-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--text-secondary); margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px); font-weight: 900; line-height: 1.12;
+      margin-bottom: 24px; letter-spacing: -1px;
+    }
+    .hero-title .gradient-word {
+      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-subtitle {
+      font-size: 18px; color: var(--text-secondary); line-height: 1.7;
+      max-width: 640px; margin: 0 auto 40px; font-weight: 400;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; border-radius: 12px; font-family: inherit;
+      font-size: 16px; font-weight: 600; text-decoration: none;
+      cursor: pointer; border: none; transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff; box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(99,102,241,0.4); transform: translateY(-1px); }
+    .btn-secondary {
+      background: #fff; color: var(--text); border: 1.5px solid var(--border);
+      box-shadow: var(--card-shadow);
+    }
+    .btn-secondary:hover { border-color: #a855f7; color: #7c3aed; transform: translateY(-1px); }
+    .btn svg { width: 18px; height: 18px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+      padding: 48px 32px 0; max-width: 700px; margin: 0 auto;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-size: 36px; font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-top: 4px; }
+
+    /* ── SECTION COMMON ── */
+    .section {
+      padding: 80px 32px; max-width: 1120px; margin: 0 auto;
+    }
+    .section-header {
+      text-align: center; margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-size: 32px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .section-header p { font-size: 16px; color: var(--text-secondary); max-width: 520px; margin: 0 auto; }
+
+    /* ── CHAPTER GRID ── */
+    .chapter-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .chapter-card {
+      background: var(--card-bg); border-radius: 16px; overflow: hidden;
+      box-shadow: var(--card-shadow); transition: all 0.25s; cursor: default;
+      border: 1px solid var(--border);
+    }
+    .chapter-card:hover { box-shadow: var(--card-hover-shadow); transform: translateY(-3px); }
+    .chapter-card-stripe { height: 4px; }
+    .chapter-card-body { padding: 24px; }
+    .chapter-card-num {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .chapter-card-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.35; }
+    .chapter-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+    .chapter-card-episodes {
+      display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 12px;
+      border-radius: 20px; background: #f1f5f9; color: var(--text-secondary);
+    }
+
+    /* ── TOPICS PILLS ── */
+    .topics-wrap { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .topic-pill {
+      padding: 8px 18px; border-radius: 24px; font-size: 13px; font-weight: 500;
+      background: #fff; border: 1px solid var(--border); color: var(--text);
+      transition: all 0.2s;
+    }
+    .topic-pill:hover { border-color: #a855f7; color: #7c3aed; transform: translateY(-1px); }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      text-align: center; padding: 80px 32px;
+      background: linear-gradient(135deg, #f8f6ff 0%, #fdf2f8 100%);
+      border-radius: 24px; max-width: 800px; margin: 0 auto 80px;
+    }
+    .cta-section h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 16px; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(15,23,42,0.5); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff; border-radius: 20px; padding: 40px; max-width: 460px;
+      width: 100%; box-shadow: 0 24px 64px rgba(0,0,0,0.15); position: relative;
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: none; } }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; background: none; border: none;
+      font-size: 24px; cursor: pointer; color: var(--text-secondary); line-height: 1;
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border-radius: 8px; transition: background 0.2s;
+    }
+    .modal-close:hover { background: #f1f5f9; }
+    .modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .modal p { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; }
+    .modal-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 14px; border-radius: 12px; font-family: inherit;
+      font-size: 15px; font-weight: 600; text-decoration: none; text-align: center;
+      border: 1.5px solid var(--border); background: #fff; color: var(--text);
+      cursor: pointer; transition: all 0.2s; margin-bottom: 12px;
+    }
+    .modal-btn:hover { border-color: #a855f7; color: #7c3aed; background: #faf5ff; }
+    .modal-btn.pods-btn { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; border: none; }
+    .modal-btn.pods-btn:hover { opacity: 0.9; color: #fff; }
+    .modal-divider {
+      display: flex; align-items: center; gap: 16px; margin: 20px 0;
+      color: var(--text-secondary); font-size: 13px;
+    }
+    .modal-divider::before, .modal-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .email-form { display: none; }
+    .email-form.active { display: block; }
+    .email-form input {
+      width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid var(--border);
+      font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;
+      margin-bottom: 12px;
+    }
+    .email-form input:focus { border-color: #8b5cf6; }
+    .email-form button {
+      width: 100%; padding: 13px; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+      font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .email-form button:hover { opacity: 0.9; }
+    .access-toggle {
+      background: none; border: none; color: #7c3aed; font-family: inherit;
+      font-size: 14px; font-weight: 600; cursor: pointer; padding: 0;
+    }
+    .access-toggle:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 40px 32px;
+      text-align: center; color: var(--text-secondary); font-size: 13px;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+    .footer-links a {
+      color: var(--text-secondary); text-decoration: none; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-brand {
+      font-weight: 700; margin-bottom: 8px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: inline-block; font-size: 15px; letter-spacing: 1px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 64px; left: 0; right: 0; background: #fff;
+        padding: 20px; gap: 16px; border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .nav-hamburger { display: block; }
+      .hero { padding: 120px 20px 60px; }
+      .hero-subtitle { font-size: 16px; }
+      .stats-bar { gap: 24px; }
+      .stat-number { font-size: 28px; }
+      .section { padding: 60px 20px; }
+      .chapter-grid { grid-template-columns: 1fr; }
+      .cta-section { margin: 0 16px 60px; padding: 48px 24px; }
+      .modal { padding: 28px; }
+    }
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="nav-logo"><img src="vizlogo.png" alt="Vizuara" style="height:32px;vertical-align:middle;margin-right:8px">VIZUARA</a>
+  <div class="nav-links" id="navLinks">
+    <a href="https://pods.vizuara.ai/" target="_blank" rel="noopener">Vizuara Pods</a>
+    <a href="https://vizz.vizuara.ai/" target="_blank" rel="noopener">VZI</a>
+    <a href="#get-the-book" class="nav-cta">Get the Book</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <img src="vizlogo.png" alt="Vizuara" style="width:100px;height:100px;margin-bottom:20px">
+  <div class="hero-label">Vizuara Presents</div>
+  <h1 class="hero-title">
+    A Complete Visual Guide to Mastering
+    <span class="gradient-word">Modern AI</span> and
+    <span class="gradient-word">LLMs</span>
+  </h1>
+  <p class="hero-subtitle">
+    13 chapters. 73 topics. 200+ visual diagrams.<br>
+    From a single neuron to distributed inference pipelines.
+  </p>
+  <div class="hero-buttons">
+    <button class="btn btn-primary" onclick="openModal()">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528"/></svg>
+      Read Online
+    </button>
+    <button class="btn btn-secondary" onclick="openModal()">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+      Download PDF
+    </button>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-number">13</div><div class="stat-label">Chapters</div></div>
+    <div class="stat"><div class="stat-number">73</div><div class="stat-label">Topics</div></div>
+    <div class="stat"><div class="stat-number">200+</div><div class="stat-label">Diagrams</div></div>
+    <div class="stat"><div class="stat-number">400+</div><div class="stat-label">Pages</div></div>
+  </div>
+</section>
+
+<!-- ── CHAPTERS ── -->
+<section class="section" id="chapters">
+  <div class="section-header">
+    <h2>What's Inside</h2>
+    <p>13 chapters covering the full stack of modern AI, from fundamentals to production inference.</p>
+  </div>
+  <div class="chapter-grid">
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#00d46a"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#00d46a">Chapter 1</div>
+        <div class="chapter-card-title">Build a Neural Network from Scratch</div>
+        <div class="chapter-card-desc">Understand neurons, forward pass, backpropagation, gradient descent, and loss functions with crystal-clear visuals.</div>
+        <span class="chapter-card-episodes">6 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#a855f7"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#a855f7">Chapter 2</div>
+        <div class="chapter-card-title">Build a Large Language Model from Scratch</div>
+        <div class="chapter-card-desc">Tokenization, embeddings, self-attention, multi-head attention, the Transformer, and full GPT architecture.</div>
+        <span class="chapter-card-episodes">8 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#00c8e6"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#00c8e6">Chapter 3</div>
+        <div class="chapter-card-title">Build a DeepSeek Model from Scratch</div>
+        <div class="chapter-card-desc">Mixture of Experts, multi-latent-head attention, shared expert routing, and DeepSeek's innovations decoded.</div>
+        <span class="chapter-card-episodes">6 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#f5a623"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#f5a623">Chapter 4</div>
+        <div class="chapter-card-title">5D Parallelism from Scratch</div>
+        <div class="chapter-card-desc">Data, tensor, pipeline, expert, and sequence parallelism explained visually for distributed training at scale.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#ec4899"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#ec4899">Chapter 5</div>
+        <div class="chapter-card-title">Build a Reasoning Language Model from Scratch</div>
+        <div class="chapter-card-desc">Chain-of-thought, RLHF, GRPO, reward models, and how models learn to reason step by step.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#3b82f6"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#3b82f6">Chapter 6</div>
+        <div class="chapter-card-title">Modern LLM Architectures</div>
+        <div class="chapter-card-desc">Llama, Gemma, Qwen, Phi, and more. Compare and contrast the design choices of today's leading models.</div>
+        <span class="chapter-card-episodes">7 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#10b981"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#10b981">Chapter 7</div>
+        <div class="chapter-card-title">RAG from Scratch</div>
+        <div class="chapter-card-desc">Retrieval-Augmented Generation: vector databases, embedding search, chunking strategies, and full RAG pipelines.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#8b5cf6"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#8b5cf6">Chapter 8</div>
+        <div class="chapter-card-title">MCP from Scratch</div>
+        <div class="chapter-card-desc">Model Context Protocol: tool use, structured outputs, function calling, and connecting LLMs to real-world systems.</div>
+        <span class="chapter-card-episodes">4 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#f59e0b"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#f59e0b">Chapter 9</div>
+        <div class="chapter-card-title">Build a Small Language Model from Scratch</div>
+        <div class="chapter-card-desc">Knowledge distillation, pruning, quantization, and techniques for building efficient, compact language models.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#e94560"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#e94560">Chapter 10</div>
+        <div class="chapter-card-title">Build an AI Agent from Scratch</div>
+        <div class="chapter-card-desc">Planning, memory, tool use, reflection loops, and orchestrating autonomous AI agents from the ground up.</div>
+        <span class="chapter-card-episodes">6 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#06b6d4"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#06b6d4">Chapter 11</div>
+        <div class="chapter-card-title">Build a Coding Agent from Scratch</div>
+        <div class="chapter-card-desc">Code generation, test-driven development loops, sandboxed execution, and building agents that write software.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#d946ef"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#d946ef">Chapter 12</div>
+        <div class="chapter-card-title">Build OpenClaw from Scratch</div>
+        <div class="chapter-card-desc">Robotics meets AI: vision-language-action models, sim-to-real transfer, and controlling robotic systems with LLMs.</div>
+        <span class="chapter-card-episodes">5 topics</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-card-stripe" style="background:#ef4444"></div>
+      <div class="chapter-card-body">
+        <div class="chapter-card-num" style="color:#ef4444">Chapter 13</div>
+        <div class="chapter-card-title">Build vLLM Inference Pipeline from Scratch</div>
+        <div class="chapter-card-desc">PagedAttention, continuous batching, KV-cache management, and high-throughput serving at production scale.</div>
+        <span class="chapter-card-episodes">6 topics</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── WHAT YOU'LL LEARN ── -->
+<section class="section">
+  <div class="section-header">
+    <h2>Key Topics Covered</h2>
+    <p>A deep dive into every essential concept in modern AI and LLMs.</p>
+  </div>
+  <div class="topics-wrap">
+    <span class="topic-pill">Neural Networks</span>
+    <span class="topic-pill">Backpropagation</span>
+    <span class="topic-pill">Transformers</span>
+    <span class="topic-pill">Self-Attention</span>
+    <span class="topic-pill">Tokenization</span>
+    <span class="topic-pill">Embeddings</span>
+    <span class="topic-pill">GPT Architecture</span>
+    <span class="topic-pill">Mixture of Experts</span>
+    <span class="topic-pill">DeepSeek</span>
+    <span class="topic-pill">Data Parallelism</span>
+    <span class="topic-pill">Tensor Parallelism</span>
+    <span class="topic-pill">Pipeline Parallelism</span>
+    <span class="topic-pill">RLHF</span>
+    <span class="topic-pill">Chain-of-Thought</span>
+    <span class="topic-pill">Reward Models</span>
+    <span class="topic-pill">GRPO</span>
+    <span class="topic-pill">Llama</span>
+    <span class="topic-pill">Gemma</span>
+    <span class="topic-pill">RAG Pipelines</span>
+    <span class="topic-pill">Vector Databases</span>
+    <span class="topic-pill">MCP</span>
+    <span class="topic-pill">Function Calling</span>
+    <span class="topic-pill">Knowledge Distillation</span>
+    <span class="topic-pill">Quantization</span>
+    <span class="topic-pill">AI Agents</span>
+    <span class="topic-pill">Coding Agents</span>
+    <span class="topic-pill">Robotics + LLMs</span>
+    <span class="topic-pill">PagedAttention</span>
+    <span class="topic-pill">vLLM</span>
+    <span class="topic-pill">KV-Cache</span>
+    <span class="topic-pill">Continuous Batching</span>
+    <span class="topic-pill">Distributed Inference</span>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="get-the-book">
+  <h2>Ready to Master Modern AI?</h2>
+  <p>Register for free on either platform and unlock the complete book instantly.</p>
+  <div class="hero-buttons" style="justify-content:center">
+    <button class="btn btn-primary" onclick="openModal()">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528"/></svg>
+      Read Online
+    </button>
+    <button class="btn btn-secondary" onclick="openModal()">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3"/></svg>
+      Download PDF
+    </button>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand"><img src="vizlogo.png" alt="Vizuara" style="height:28px;vertical-align:middle;margin-right:8px">VIZUARA</div>
+  <div class="footer-links">
+    <a href="https://pods.vizuara.ai/" target="_blank" rel="noopener">Vizuara Pods</a>
+    <a href="https://vizz.vizuara.ai/" target="_blank" rel="noopener">VZI</a>
+    <a href="#chapters">Chapters</a>
+    <a href="#get-the-book">Get the Book</a>
+  </div>
+  <p>Built by Vizuara AI</p>
+</footer>
+
+<!-- ── ACCESS GATE MODAL ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h3>Get Free Access to the Book</h3>
+    <p>Register on either platform to unlock the complete book with all 13 chapters and 200+ visual diagrams.</p>
+
+    <a href="https://pods.vizuara.ai/" target="_blank" rel="noopener" class="modal-btn pods-btn">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+      Register on Vizuara Pods
+    </a>
+    <a href="https://vizz.vizuara.ai/" target="_blank" rel="noopener" class="modal-btn">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+      Register on VZI
+    </a>
+
+    <div class="modal-divider">Already registered?</div>
+
+    <div id="accessToggleWrap" style="text-align:center">
+      <button class="access-toggle" onclick="showEmailForm()">Access Book</button>
+    </div>
+
+    <div class="email-form" id="emailForm">
+      <input type="email" id="emailInput" placeholder="Enter your email address" autocomplete="email">
+      <button onclick="submitEmail()">Access the Book</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Navigation toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  // Close mobile menu when a link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ── Modal
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    // Reset form state
+    document.getElementById('emailForm').classList.remove('active');
+    document.getElementById('accessToggleWrap').style.display = '';
+  }
+
+  // Close modal on overlay click
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Email form
+  function showEmailForm() {
+    document.getElementById('emailForm').classList.add('active');
+    document.getElementById('accessToggleWrap').style.display = 'none';
+    document.getElementById('emailInput').focus();
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('emailInput').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailInput').style.borderColor = '#ef4444';
+      document.getElementById('emailInput').setAttribute('placeholder', 'Please enter a valid email');
+      return;
+    }
+    localStorage.setItem('vizuara_book_email', email);
+    localStorage.setItem('vizuara_book_access', 'true');
+    window.location.href = 'vizuara-visual-ai-book.html';
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('emailInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitEmail();
+  });
+
+  // ── Subtle scroll animation for chapter cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.chapter-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.5s ease ${i * 0.05}s, transform 0.5s ease ${i * 0.05}s, box-shadow 0.25s ease`;
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
